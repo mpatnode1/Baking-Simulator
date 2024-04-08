@@ -31,7 +31,7 @@ namespace ProgrammingIICraftDemoPages
         public Game() 
         {
             RecipeSetUp();
-
+            
         }
 
         public void RecipeSetUp()
@@ -122,8 +122,7 @@ namespace ProgrammingIICraftDemoPages
                 number++;
                 
             }
-            Console.WriteLine(output);
-            Console.WriteLine("nooom");
+           
             return output;
         }
     }

@@ -21,8 +21,10 @@ namespace ProgrammingIICraftDemoPages
     public partial class Main : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+       
         public Main()
         {
+           
             InitializeComponent();
         }
 

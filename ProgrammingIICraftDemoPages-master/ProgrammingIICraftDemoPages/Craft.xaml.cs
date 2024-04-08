@@ -35,19 +35,24 @@ namespace ProgrammingIICraftDemoPages
             SetButtonVisibility();
             //Output.Text = mainWindow.game.GetRecipeList();
 
-            MenuItem milkshake = new MenuItem() {ItemContent = "Milkshake" };
-            milkshake.Items.Add(new MenuItem() { ItemContent = "Milk" });
-            milkshake.Items.Add(new MenuItem() { ItemContent = "Chocolate" });
-            milkshake.ItemImage = (ImageSource)Resources["poop_sharp_solidDrawingImage"];
-            Trace.WriteLine(Resources.Keys);
+            //puts recipes from game into tree view 
 
-            RecipeTreeView.Items.Add(milkshake);
+            for (int i = 0; i < mainWindow.game.Recipes.Count; i++)
+            {
+                MenuItem recipeListItem = new MenuItem() { ItemContent = mainWindow.game.Recipes[i].RecipeName };
+                //recipeListItem.ItemDescriptions.Add(new MenuItem() { ItemContent = mainWindow.game.Recipes[i].GetRecipeDescription()});
 
-            MenuItem suspiciousMilkshake = new MenuItem() { ItemContent = "Suspicious Milkshake" };
-            suspiciousMilkshake.Items.Add(new MenuItem() { ItemContent = "'Milk'" });
-            suspiciousMilkshake.Items.Add(new MenuItem() { ItemContent = "Chocolate" });
+                //when player expands recipe, recipe requirements are shown
+                foreach (Item item in mainWindow.game.Recipes[i].RecipeRequirements)
+                {
+                    string printRequirement = item.ItemAmount + " " + item.ItemAmountType + " " + item.ItemName;
+                    recipeListItem.Items.Add(new MenuItem() { ItemContent = printRequirement });
+                }
+                
+                RecipeTreeView.Items.Add(recipeListItem);
 
-            RecipeTreeView.Items.Add(suspiciousMilkshake);
+            }
+
         }
 
         private void SetButtonVisibility()
@@ -71,6 +76,7 @@ namespace ProgrammingIICraftDemoPages
     {
         public ObservableCollection<MenuItem> Items{ get; set; }
 
+        //public ObservableCollection<MenuItem> ItemDescriptions{get; set;}
         public string ItemContent{ get; set; }
 
         public ImageSource ItemImage { get; set; }

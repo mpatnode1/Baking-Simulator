@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,14 @@ namespace ProgrammingIICraftDemoPages
             string space = "      ";
             string output = "";
             output += $"{RecipeName}\n{space}{RecipeDescription}\n{space}Makes {RecipeAmount} {RecipeAmountType} ({RecipeValue.ToString("C")} ea)\n\n{space}Requirements:\n";
+            
+            return output;
+        }
+
+        public string GetRecipeRequirements()
+        {
+            string space = "      ";
+            string output = "";
             foreach (Item item in RecipeRequirements)
             {
                 output += $"{space}{space}* {item.GetItemDescription()}";

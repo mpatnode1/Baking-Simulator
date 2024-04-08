@@ -5,13 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProgrammingIICraftDemoPages"
       mc:Ignorable="d" 
-       d:DesignHeight="400" d:DesignWidth="592"
+       d:DesignHeight="456" d:DesignWidth="358"
       Title="Trade">
 
     <Grid Loaded="Grid_Loaded">
-        <ScrollViewer Width="536" Height="376" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="Output"  TextWrapping="Wrap" Text="Trade" Height="356"/>
-        </ScrollViewer>
+        <Rectangle HorizontalAlignment="Center" Height="456" Fill="#FDE2E4" VerticalAlignment="Center" Width="592"/>
+
+
+        <Button Content="Buy" HorizontalAlignment="Left" Margin="24,353,0,0" VerticalAlignment="Top" Height="73" Width="142" Background="#FFBCD4E6" FontSize="36" Click="Buy_Click"/>
+        <Button Content="Sell" HorizontalAlignment="Left" Margin="192,353,0,0" VerticalAlignment="Top" Height="73" Width="142" Background="#FFBCD4E6" FontSize="36" Click="Sell_Click"/>
+
+        <Rectangle Height="302" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,26,0,0"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="302" Width="310"/>
 
     </Grid>
 </Page>

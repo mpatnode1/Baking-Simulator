@@ -14,8 +14,10 @@
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
                     <Grid>
+                        <TextBlock Text="{Binding ItemDescriptions}"/>
                         <TextBlock Text="{Binding ItemContent}"/>
-                        <Image Source="{Binding ItemImage}" Height="5" Width="5"/>
+                        
+                       <!-- <Image Source="{Binding ItemImage}" Height="5" Width="5"/> -->
                     </Grid> 
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>

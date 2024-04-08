@@ -38,5 +38,14 @@ namespace ProgrammingIICraftDemoPages
             //mainWindow.Inventory.Visibility = Visibility.Visible;
             mainWindow.Craft.Visibility = Visibility.Visible;
         }
+
+        private void Buy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Sell_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
