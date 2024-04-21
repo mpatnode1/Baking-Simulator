@@ -17,8 +17,8 @@ namespace ProgrammingIICraftDemoPages
 {
  /*
  * Programming II Craft Project Demo (Pages)
- * Your Name
- * Date
+ * Meghan Patnode
+ * April 17th 2024
  * Uses demo code from PROG 201 Programming II course
  * https://github.com/janell-baxter/ProgrammingIICraftDemoPages
  */

@@ -18,7 +18,7 @@ namespace ProgrammingIICraftDemoPages
 
         public string GetItemDescription()
         {
-            return $"{ItemAmount} {ItemAmountType} {ItemName} ({ItemValue.ToString("C")} ea)\n{ItemDescription}";
+            return $"{ItemAmount} {ItemAmountType} {ItemName} ({ItemValue.ToString("C")} ea)\n     {ItemDescription}";
         }
     
         public double ValueForCurrentItemAmount()

@@ -21,15 +21,27 @@ namespace ProgrammingIICraftDemoPages
     public partial class Trade : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
         public Trade()
         {
             InitializeComponent();
+            TraderConversationUpdate();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             SetButtonVisibility();
-            
+            TraderConversationUpdate();
+
+            TradeInventory.Text  = mainWindow.game.Vendor.GetInventoryItemList();
+
+
+        }
+
+        private void TraderConversationUpdate()
+        {
+            TraderConversation.Text = mainWindow.game.VendorIntroduction();
+               
         }
 
         private void SetButtonVisibility()

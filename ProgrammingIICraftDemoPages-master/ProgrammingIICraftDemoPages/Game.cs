@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,8 @@ namespace ProgrammingIICraftDemoPages
 {
     public class Game
     {
+        int shopInteractionCount = 0;
+
         public Person Player = new Person()
         {
             Inventory = new List<Item>
@@ -20,10 +24,20 @@ namespace ProgrammingIICraftDemoPages
         {
             Inventory = new List<Item>
         {
-            new Item() {ItemName="Chocolate", ItemAmount = 1, ItemAmountType = "pound(s)", ItemValue = 9.99}
-
+            new Item() {ItemName="Chocolate", ItemAmount = 10, ItemAmountType = "pound(s)", ItemValue = 9.99},
+            new Item(){ItemName = "Vanilla Extract", ItemAmount = 10, ItemAmountType = "tsp", ItemValue = 2.67 },
+            new Item(){ItemName = "Milk", ItemAmount = 10, ItemAmountType="tbsps", ItemValue = 4.25 },
+            new Item(){ItemName = "Powdered Sugar", ItemAmount = 10, ItemAmountType="cup", ItemValue = 1.95 },
+            new Item(){ItemName = "Banana", ItemAmount = 10, ItemAmountType="cups", ItemValue=0.99},
+            new Item(){ItemName = "Egg", ItemAmount = 10, ItemAmountType = "count", ItemValue = 3.89},
+            new Item(){ItemName = "Cocoa Powder", ItemAmount = 10, ItemAmountType = "cup", ItemValue = 2.50},
+            new Item(){ItemName = "Pudding Mix", ItemAmount = 10, ItemAmountType = "cups", ItemValue = 4.00},
+            new Item(){ItemName = "Vanilla Wafer", ItemAmount = 10, ItemAmountType = "count", ItemValue = 1.50},
+            new Item(){ItemName = "Flour", ItemAmount = 10, ItemAmountType="cup", ItemValue = 5.97 },
+            new Item(){ItemName = "Sugar", ItemAmount = 10, ItemAmountType="cups", ItemValue = 3.49 },
              }
         };
+        public string Space = "      ";
 
 
         public List<Recipe> Recipes = new List<Recipe>();
@@ -31,7 +45,23 @@ namespace ProgrammingIICraftDemoPages
         public Game() 
         {
             RecipeSetUp();
-            
+            Vendor.SetDefaultName();
+        }
+
+        public string VendorIntroduction()
+        {
+            string output = "";
+            if (shopInteractionCount == 0)
+            {
+                output += $"Welcome to my shop {Player.PersonName}. My name is {Vendor.PersonName}.\n";
+                shopInteractionCount++;
+            }
+            else
+            {
+                output += $"Would you like to buy anything else, {Player.PersonName}?\n";
+                output += $"These are the wares I have left:\n";
+            }
+            return output;
         }
 
         public void RecipeSetUp()
@@ -96,7 +126,7 @@ namespace ProgrammingIICraftDemoPages
              new Recipe()
              {
                  RecipeName = "Frosted Sugar Cookie",
-                 RecipeDescription = "",
+                 RecipeDescription = "You can cut them into so many shapes! (With your imagination).",
                  RecipeValue = 2.50,
                  RecipeAmount =  12,
                  RecipeAmountType = "count",
@@ -111,6 +141,7 @@ namespace ProgrammingIICraftDemoPages
              );
 
         }
+
 
         public string GetRecipeList()
         {
