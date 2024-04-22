@@ -5,14 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProgrammingIICraftDemoPages"
       mc:Ignorable="d" 
-      d:DesignHeight="456" d:DesignWidth="190"
+      d:DesignHeight="456" d:DesignWidth="211"
       Title="Inventory">
 
     <Grid>
-        <Rectangle  Fill="#FDE2E4"></Rectangle>
+        <Rectangle  Fill="#DBE7E4"></Rectangle>
         <Rectangle Fill="White" Margin="10,10,10,10"/>
-        <ListView ItemsSource="{Binding InventoryList}" Margin="10,10,10,10">
-            <TextBlock Text = "{Binding ItemDescription}"/>
+        <ListView ItemsSource="{Binding InventoryList}" Margin="10,10,10,10" Width="191">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text = "{Binding ItemDescription}" Width="184"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>

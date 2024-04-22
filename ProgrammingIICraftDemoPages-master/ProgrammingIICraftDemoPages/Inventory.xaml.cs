@@ -21,18 +21,27 @@ namespace ProgrammingIICraftDemoPages
     /// </summary>
     public partial class Inventory : Page
     {
-        public ObservableCollection<Item> InventoryList { get; set; } = new ObservableCollection<Item>();
+        
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         public Inventory()
         {
            
             InitializeComponent();
             //InventoryText.Text = mainWindow.game.Player.GetInventoryItemList();
-            
-            foreach(Item item in mainWindow.game.Player.Inventory) 
+
+            InventoryView inventoryview = new InventoryView();
+            foreach (Item item in mainWindow.game.Player.Inventory) 
             {
-                InventoryList.Add(item);
+                inventoryview.InventoryList.Add(item);
             }
+
+            this.DataContext = inventoryview;
         }
+    }
+
+
+    public class InventoryView
+    {
+        public ObservableCollection<Item> InventoryList { get; set; } = new ObservableCollection<Item>();
     }
 }

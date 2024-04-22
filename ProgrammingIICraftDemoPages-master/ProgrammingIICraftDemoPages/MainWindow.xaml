@@ -9,7 +9,7 @@
     <Grid Loaded="Grid_Loaded">
         <DockPanel HorizontalAlignment="Center" Width="600" Height="584" VerticalAlignment="Top">
             <Frame x:Name="ContentFrame" Margin="15,75,0,-32" NavigationUIVisibility="Hidden" Width="358" Height="456"/>
-            <Frame x:Name="InventoryFrame" Margin="15,75,15,-32" NavigationUIVisibility="Hidden" Width="190" Height="456"/>
+            <Frame x:Name="InventoryFrame" Margin="10,75,10,-32" NavigationUIVisibility="Hidden" Width="211" Height="456"/>
         </DockPanel>
         <Grid VerticalAlignment="Top" Height="100" HorizontalAlignment="Center">
             <Rectangle x:Name="CraftBackground" Stroke="Black" Margin="206,0,196,0" Fill="#FFB9B9B9"/>

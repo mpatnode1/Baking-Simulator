@@ -48,6 +48,28 @@ namespace ProgrammingIICraftDemoPages
             Vendor.SetDefaultName();
         }
 
+        public void CheckAbilityToCraft(MenuItem menuItem)
+        {
+            MenuItem selectedRecipe = menuItem;
+            Recipe activeRecipe = Recipes.Find(x => x.Equals(selectedRecipe));
+            if (activeRecipe != null)
+            {
+                foreach(Item itemInRecipe in activeRecipe.RecipeRequirements)
+                {
+                    if(Player.Inventory.Contains(itemInRecipe))
+                    {
+                        Item itemInPlayerInventory = Player.Inventory.Find(itemInRecipe);
+                    }
+                   
+                }
+            }
+            else 
+            {
+
+            }
+            //bool recipetry = Recipes.Any(p => p.RecipeName = selectedRecipe.ToString());
+        }
+
         public string VendorIntroduction()
         {
             string output = "";
@@ -55,6 +77,7 @@ namespace ProgrammingIICraftDemoPages
             {
                 output += $"Welcome to my shop {Player.PersonName}. My name is {Vendor.PersonName}.\n";
                 shopInteractionCount++;
+                //TO DO when buy button is complete move shop interaction ++ to there
             }
             else
             {

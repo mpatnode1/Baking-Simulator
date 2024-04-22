@@ -68,7 +68,14 @@ namespace ProgrammingIICraftDemoPages
         {
             //TreeViewItem selectedRecipe = (TreeViewItem)RecipeTreeView.SelectedItem;
             MenuItem selectedRecipe = (MenuItem)RecipeTreeView.SelectedItem;
-    
+            //if inventory contains items for recipe requirements of selected item
+            //then if inventory contains amount for each item
+
+            mainWindow.game.CheckAbilityToCraft(selectedRecipe);
+            //foreach(MenuItem menuItem in selectedRecipe.Items)
+            //{
+            //    mainWindow.game.Player.Inventory.Any(p => Item.ItemName > menuItem.ToString());
+            //}
 
         }
 
