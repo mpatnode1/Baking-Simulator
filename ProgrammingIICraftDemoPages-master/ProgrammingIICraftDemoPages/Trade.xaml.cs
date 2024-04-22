@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +23,21 @@ namespace ProgrammingIICraftDemoPages
     public partial class Trade : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-
         public Trade()
         {
+
             InitializeComponent();
-            TraderConversationUpdate();
+
+            TradeViewModel tradeViewModel = new TradeViewModel();
+            foreach (Item item in mainWindow.game.Vendor.Inventory)
+            {
+                tradeViewModel.TradeList.Add(item);
+
+                //string ItemDescription = item.GetItemDescription();
+
+            }
+            this.DataContext = tradeViewModel;
+
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -33,7 +45,7 @@ namespace ProgrammingIICraftDemoPages
             SetButtonVisibility();
             TraderConversationUpdate();
 
-            TradeInventory.Text  = mainWindow.game.Vendor.GetInventoryItemList();
+            //TradeInventory.Text  = mainWindow.game.Vendor.GetInventoryItemList();
 
 
         }
@@ -59,5 +71,20 @@ namespace ProgrammingIICraftDemoPages
         {
 
         }
+
+        private void Increment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Decrement_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
+
+    public class TradeViewModel 
+    {
+        public ObservableCollection<Item> TradeList { get; set; } = new ObservableCollection<Item>();
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,30 +17,22 @@ using System.Windows.Shapes;
 namespace ProgrammingIICraftDemoPages
 {
     /// <summary>
-    /// Interaction logic for Main.xaml
+    /// Interaction logic for Inventory.xaml
     /// </summary>
-    public partial class Main : Page
+    public partial class Inventory : Page
     {
+        public ObservableCollection<Item> InventoryList { get; set; } = new ObservableCollection<Item>();
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-       
-        public Main()
+        public Inventory()
         {
            
             InitializeComponent();
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-            SetButtonVisibility();
-            //Output.Text = mainWindow.game.Player.GetInventoryItemList();
-
-        }
-
-        private void SetButtonVisibility()
-        {
-            //mainWindow.Inventory.Visibility = Visibility.Visible;
-            mainWindow.Trade.Visibility = Visibility.Visible;
-            mainWindow.Craft.Visibility = Visibility.Visible;
+            //InventoryText.Text = mainWindow.game.Player.GetInventoryItemList();
+            
+            foreach(Item item in mainWindow.game.Player.Inventory) 
+            {
+                InventoryList.Add(item);
+            }
         }
     }
 }

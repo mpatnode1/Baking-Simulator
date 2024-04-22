@@ -19,15 +19,19 @@
         <TextBlock Name="TraderConversation" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="79" Width="310"/>
 
         <Rectangle Height="207" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,123,0,0"/>
-        <ScrollViewer Name ="VendorInventory" Margin="24,123,24,126">
-            <Menu Width="288">
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
-
-            </Menu>
-        </ScrollViewer>
+        <ListView ItemsSource="{Binding TradeList}" Name="TradeInventory" Margin="24,124,24,124">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Name="TradeItemName" Width="220" Text="{Binding ItemDescription}"/>
+                        <StackPanel Name="ItemAmountCounter" Orientation="Horizontal">
+                            <Button Name="IncrementItem" Content=" ▲ " Click="Increment_Click"/>
+                            <TextBlock Name="ItemCount" Text="  0" Width="20"/>
+                            <Button Name="DecrementItem" Content=" ▼ " Click="Decrement_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

@@ -38,6 +38,8 @@ namespace ProgrammingIICraftDemoPages
             ContentFrame.Navigate(new Main());
             PlayerName.Text = game.Player.PersonName;
             Currency.Text = game.Player.PersonCurrency.ToString("C");
+
+            InventoryFrame.Navigate(new Inventory());
         }
 
         #region EventHandlers

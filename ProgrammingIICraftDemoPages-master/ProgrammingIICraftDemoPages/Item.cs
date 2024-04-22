@@ -10,15 +10,20 @@ namespace ProgrammingIICraftDemoPages
     public class Item
     {
         public string ItemName = "";
-        public string ItemDescription = "";
+        public string ItemDescription 
+        {
+            get { return GetItemDescription(); }
+            set { } 
+        }
+
         public double ItemValue = 0;
         public double ItemAmount = 1;
         public string ItemAmountType = "cup(s)";
-        public double CurrentItemValue;
+        public double CurrentItemValue { get; set; }
 
         public string GetItemDescription()
         {
-            return $"{ItemAmount} {ItemAmountType} {ItemName} ({ItemValue.ToString("C")} ea)\n     {ItemDescription}";
+            return $"{ItemAmount} {ItemAmountType} {ItemName} ({ItemValue.ToString("C")} ea)";
         }
     
         public double ValueForCurrentItemAmount()

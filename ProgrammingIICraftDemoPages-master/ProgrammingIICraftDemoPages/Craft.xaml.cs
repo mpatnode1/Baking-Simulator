@@ -66,6 +66,9 @@ namespace ProgrammingIICraftDemoPages
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
+            //TreeViewItem selectedRecipe = (TreeViewItem)RecipeTreeView.SelectedItem;
+            MenuItem selectedRecipe = (MenuItem)RecipeTreeView.SelectedItem;
+    
 
         }
 
@@ -74,6 +77,7 @@ namespace ProgrammingIICraftDemoPages
 
     public class MenuItem
     {
+        
         public ObservableCollection<MenuItem> Items{ get; set; }
 
         //public ObservableCollection<MenuItem> ItemDescriptions{get; set;}
