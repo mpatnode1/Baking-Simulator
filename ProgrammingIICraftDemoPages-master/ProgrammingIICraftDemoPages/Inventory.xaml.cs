@@ -28,9 +28,18 @@ namespace ProgrammingIICraftDemoPages
            
             InitializeComponent();
             //InventoryText.Text = mainWindow.game.Player.GetInventoryItemList();
+            UpdateInventory();
+            
+        }
 
+        public void UpdateInventory()
+        {
             InventoryView inventoryview = new InventoryView();
-            foreach (Item item in mainWindow.game.Player.Inventory) 
+
+            //prevents duplication of items in inventory
+            inventoryview.InventoryList.Clear();
+
+            foreach (Item item in mainWindow.game.Player.Inventory)
             {
                 inventoryview.InventoryList.Add(item);
             }
@@ -38,7 +47,6 @@ namespace ProgrammingIICraftDemoPages
             this.DataContext = inventoryview;
         }
     }
-
 
     public class InventoryView
     {

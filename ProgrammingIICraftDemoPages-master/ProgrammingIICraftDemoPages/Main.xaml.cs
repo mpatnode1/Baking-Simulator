@@ -40,6 +40,7 @@ namespace ProgrammingIICraftDemoPages
             //mainWindow.Inventory.Visibility = Visibility.Visible;
             mainWindow.Trade.Visibility = Visibility.Visible;
             mainWindow.Craft.Visibility = Visibility.Visible;
+            mainWindow.Sell.Visibility = Visibility.Visible;
         }
     }
 }

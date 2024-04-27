@@ -28,9 +28,12 @@ namespace ProgrammingIICraftDemoPages
     public partial class MainWindow : Window
     {
         public Game game = new Game();
+
+        public Inventory inventory;
         public MainWindow()
         {
             InitializeComponent();
+            inventory = new Inventory();
         }
 
         private void SetUp()
@@ -39,7 +42,7 @@ namespace ProgrammingIICraftDemoPages
             PlayerName.Text = game.Player.PersonName;
             Currency.Text = game.Player.PersonCurrency.ToString("C");
 
-            InventoryFrame.Navigate(new Inventory());
+            InventoryFrame.Navigate(inventory);
         }
 
         #region EventHandlers

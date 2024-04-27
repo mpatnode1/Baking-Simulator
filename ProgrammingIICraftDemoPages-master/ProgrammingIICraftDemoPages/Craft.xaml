@@ -9,16 +9,18 @@
 
     <Grid Loaded="Grid_Loaded">
         <Rectangle HorizontalAlignment="Center" Height="456" Fill="#FDE2E4" VerticalAlignment="Center" Width="592"/>
-        <TreeView Name="RecipeTreeView" Margin="24,24,24,126" >
+        <Rectangle Fill="White" Margin="24,299,24,119"/>
+        <TextBlock Name="FeedbackText" Margin="24,299,24,119"/>
+        <TreeView Name="RecipeTreeView" Margin="24,24,24,173" >
 
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
                     <Grid>
                         <!--<TextBlock Text="{Binding ItemDescriptions}"/>-->
                         <TextBlock Text="{Binding ItemContent}"/>
-                        
-                       <!-- <Image Source="{Binding ItemImage}" Height="5" Width="5"/> -->
-                    </Grid> 
+
+                        <!-- <Image Source="{Binding ItemImage}" Height="5" Width="5"/> -->
+                    </Grid>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>

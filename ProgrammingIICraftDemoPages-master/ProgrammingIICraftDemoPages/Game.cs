@@ -5,19 +5,23 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ProgrammingIICraftDemoPages
 {
     public class Game
     {
         int shopInteractionCount = 0;
+        int craftSuccess = 2;
 
         public Person Player = new Person()
         {
             Inventory = new List<Item>
         {
             new Item() {ItemName="Chocolate", ItemAmount = 3, ItemValue = 9.99, ItemAmountType = "pound(s)"},
-            new Item() {ItemName="Water", ItemAmount = 10, ItemValue = .10, ItemAmountType = "cup(s)"}
+            new Item() {ItemName="Water", ItemAmount = 10, ItemValue = .10, ItemAmountType = "cup(s)"},
+            new Item(){ItemName = "Vanilla Extract", ItemAmount = 2, ItemAmountType = "tsp", ItemValue = 2.67 },
+            new Item(){ItemName = "Milk", ItemAmount = 4, ItemAmountType="tbsps", ItemValue = 4.25 }
              }
         };
         public Person Vendor = new Person()
@@ -48,26 +52,73 @@ namespace ProgrammingIICraftDemoPages
             Vendor.SetDefaultName();
         }
 
-        public void CheckAbilityToCraft(MenuItem menuItem)
+        public bool CheckAbilityToCraft(Recipe activeRecipe)
         {
-            MenuItem selectedRecipe = menuItem;
-            Recipe activeRecipe = Recipes.Find(x => x.Equals(selectedRecipe));
+            //Recipe activeRecipe = Recipes.Find(x => x.RecipeName = selectedRecipe.ItemContent);
             if (activeRecipe != null)
             {
                 foreach(Item itemInRecipe in activeRecipe.RecipeRequirements)
-                {
-                    if(Player.Inventory.Contains(itemInRecipe))
-                    {
-                        Item itemInPlayerInventory = Player.Inventory.Find(itemInRecipe);
-                    }
-                   
-                }
+                {      
+                        if (craftSuccess == 0){ break; }
+                        Item? itemInPlayerInventory = Player.Inventory.Find(x=> x.ItemName == itemInRecipe.ItemName);
+                        
+                        //checks if item is in inventory
+                        if(itemInPlayerInventory != null)
+                        {
+                            //checks if theres enough of item
+                            if(itemInPlayerInventory.ItemAmount >= itemInRecipe.ItemAmount)
+                            {
+                                craftSuccess = 1;
+                            }
+                            else
+                            {
+                                craftSuccess = 0;
+                                //TO DO: ADD FEEDBACK WHEN FAILED TO CRAFT
+                            }
+                        }
+                        else
+                        {
+                            craftSuccess = 0;
+                            //TO DO: PLAYER DOES NOT HAVE ENOUGH OF ITEM
+                            //ADD FEEDBACK
+                        }
+                   }
             }
             else 
             {
-
+                craftSuccess = 0;
             }
             //bool recipetry = Recipes.Any(p => p.RecipeName = selectedRecipe.ToString());
+
+            //add the item to the player's inventory
+            switch(craftSuccess) 
+            {
+                case 0:
+                    {
+                        //TO DO: Add feedback
+                        
+                        return false;
+                    }
+                case 1:
+                    {
+                        foreach (Item itemInRecipe in activeRecipe.RecipeRequirements)
+                        {
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == itemInRecipe.ItemName);
+
+                            itemInPlayerInventory.ItemAmount -= itemInRecipe.ItemAmount;
+                            if (itemInPlayerInventory.ItemAmount <= 0)
+                            {
+                                Player.Inventory.Remove(itemInPlayerInventory);
+                            }
+                        }
+
+                        Player.Inventory.Add(activeRecipe.CraftedRecipe);
+                        return true;
+                        
+                    }
+            }
+
+            return false;
         }
 
         public string VendorIntroduction()
@@ -95,11 +146,20 @@ namespace ProgrammingIICraftDemoPages
             Recipes.Add(
                   new Recipe()
                   {
+                      CraftedRecipe = new Item()
+                      {
+                          ItemName = "Powdered Sugar Icing",
+                          ItemValue = 5.97,
+                          ItemAmount = 8,
+                          ItemAmountType = "cups",
+                      }, 
+
                       RecipeName = "Powdered Sugar Icing",
                       RecipeDescription = "Tasty icing that can be used with many recipes.",
                       RecipeValue = 5.97,
                       RecipeAmount = 8,
-                      RecipeAmountType = "cup(s)",
+                      RecipeAmountType = "cups",
+
                   RecipeRequirements = new List<Item>()
                       {
                         new Item(){ItemName = "Powdered Sugar", ItemAmount = 1, ItemAmountType="cup", ItemValue = 1.95 },
@@ -112,11 +172,20 @@ namespace ProgrammingIICraftDemoPages
             Recipes.Add(
                 new Recipe()
                 {
+                    CraftedRecipe = new Item()
+                    {
+                        ItemName = "Chocolate Cake",
+                        ItemValue = 10.60,
+                        ItemAmount = 4,
+                        ItemAmountType = "slices",
+                    },
+
                     RecipeName = "Chocolate Cake",
                     RecipeDescription = "A classic cake with chocolate flavoring.",
                     RecipeValue = 10.60,
                     RecipeAmount = 4,
-                    RecipeAmountType = "slice(s)",
+                    RecipeAmountType = "slices",
+
                 RecipeRequirements = new List<Item>()
                     {
                         new Item(){ItemName = "Powdered Sugar Icing", ItemAmount = 1.5, ItemAmountType="cups", ItemValue = 5.97 },
@@ -130,11 +199,20 @@ namespace ProgrammingIICraftDemoPages
             Recipes.Add(
                 new Recipe()
                 {
+                    CraftedRecipe = new Item()
+                    {
+                        ItemName = "Banana Pudding",
+                        ItemValue = 4.50,
+                        ItemAmount = 10,
+                        ItemAmountType = "cups",
+                    },
+
                     RecipeName = "Banana Pudding",
                     RecipeDescription = "Did you hear about the dessert that was made with a bad banana? It was very off-pudding.",
                     RecipeValue = 4.50,
                     RecipeAmount = 10,
                     RecipeAmountType = "cups",
+
                 RecipeRequirements = new List<Item>()
                     {
                         new Item(){ItemName = "Milk", ItemAmount = 2, ItemAmountType="tbsps", ItemValue = 4.25 },
@@ -148,6 +226,14 @@ namespace ProgrammingIICraftDemoPages
             Recipes.Add(
              new Recipe()
              {
+                 CraftedRecipe = new Item()
+                 {
+                     ItemName = "Frosted Sugar Cookie",
+                     ItemValue = 2.50,
+                     ItemAmount = 12,
+                     ItemAmountType = "count",
+                 },
+
                  RecipeName = "Frosted Sugar Cookie",
                  RecipeDescription = "You can cut them into so many shapes! (With your imagination).",
                  RecipeValue = 2.50,

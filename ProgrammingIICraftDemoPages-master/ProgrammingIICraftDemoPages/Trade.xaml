@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ProgrammingIICraftDemoPages"
       mc:Ignorable="d" 
        d:DesignHeight="456" d:DesignWidth="358"
-      Title="Trade">
+      Title="Buy">
 
     <Grid Loaded="Grid_Loaded">
         <Rectangle HorizontalAlignment="Center" Height="456" Fill="#FDE2E4" VerticalAlignment="Center" Width="592"/>

@@ -9,6 +9,7 @@ namespace ProgrammingIICraftDemoPages
 {
     public class Recipe
     {
+        public Item CraftedRecipe = null;
         public string RecipeName = "";
         public string RecipeDescription = "";
         public double RecipeValue = 0;

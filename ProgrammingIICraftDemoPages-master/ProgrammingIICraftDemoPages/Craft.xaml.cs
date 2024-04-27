@@ -25,6 +25,8 @@ namespace ProgrammingIICraftDemoPages
     public partial class Craft : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
+        IDictionary<MenuItem, Recipe> MenuItemToRecipe = new Dictionary<MenuItem, Recipe>();
         public Craft()
         {
             InitializeComponent();
@@ -35,12 +37,19 @@ namespace ProgrammingIICraftDemoPages
             SetButtonVisibility();
             //Output.Text = mainWindow.game.GetRecipeList();
 
-            //puts recipes from game into tree view 
+            setUpRecipes();
 
+        }
+
+        private void setUpRecipes()
+        {
+            //puts recipes from game into tree view 
             for (int i = 0; i < mainWindow.game.Recipes.Count; i++)
             {
                 MenuItem recipeListItem = new MenuItem() { ItemContent = mainWindow.game.Recipes[i].RecipeName };
                 //recipeListItem.ItemDescriptions.Add(new MenuItem() { ItemContent = mainWindow.game.Recipes[i].GetRecipeDescription()});
+
+                MenuItemToRecipe.Add(recipeListItem, mainWindow.game.Recipes[i]);
 
                 //when player expands recipe, recipe requirements are shown
                 foreach (Item item in mainWindow.game.Recipes[i].RecipeRequirements)
@@ -48,13 +57,11 @@ namespace ProgrammingIICraftDemoPages
                     string printRequirement = item.ItemAmount + " " + item.ItemAmountType + " " + item.ItemName;
                     recipeListItem.Items.Add(new MenuItem() { ItemContent = printRequirement });
                 }
-                
+
                 RecipeTreeView.Items.Add(recipeListItem);
 
             }
-
         }
-
         private void SetButtonVisibility()
         {
             mainWindow.Craft.Visibility = Visibility.Collapsed;
@@ -66,20 +73,27 @@ namespace ProgrammingIICraftDemoPages
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-            //TreeViewItem selectedRecipe = (TreeViewItem)RecipeTreeView.SelectedItem;
-            MenuItem selectedRecipe = (MenuItem)RecipeTreeView.SelectedItem;
-            //if inventory contains items for recipe requirements of selected item
-            //then if inventory contains amount for each item
+            FeedbackText.Text = string.Empty;
 
-            mainWindow.game.CheckAbilityToCraft(selectedRecipe);
-            //foreach(MenuItem menuItem in selectedRecipe.Items)
-            //{
-            //    mainWindow.game.Player.Inventory.Any(p => Item.ItemName > menuItem.ToString());
-            //}
-
-        }
-
+           //takes selected item in from menu and tries to craft it 
+           MenuItem selectedRecipe = (MenuItem)RecipeTreeView.SelectedItem;
      
+            Recipe result;
+
+            if (MenuItemToRecipe.TryGetValue(selectedRecipe, out result));
+            bool craftSuccess = mainWindow.game.CheckAbilityToCraft(result);
+
+            if(craftSuccess)
+            {
+                FeedbackText.Text = "Recipe made! Item has been added to your inventory.";
+                mainWindow.inventory.UpdateInventory();
+            }
+            else
+            {
+                FeedbackText.Text = "You do not have the correct ingredients.";
+            }
+           
+        }
     }
 
     public class MenuItem
