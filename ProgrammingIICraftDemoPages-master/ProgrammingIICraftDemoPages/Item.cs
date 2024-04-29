@@ -20,6 +20,7 @@ namespace ProgrammingIICraftDemoPages
         public double ItemAmount = 1;
         public string ItemAmountType = "cup(s)";
         public double CurrentItemValue { get; set; }
+        public int BuyingCount = 0;
 
         public string GetItemDescription()
         {

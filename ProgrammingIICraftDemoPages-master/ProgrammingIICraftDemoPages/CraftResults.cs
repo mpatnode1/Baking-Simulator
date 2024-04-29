@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProgrammingIICraftDemoPages
 {
-    class RecipesEnum
+    enum CraftResults
     {
+       craftSuccess = 0,
+       craftFailure = 1,
+       craftNotActive = 2,
     }
 }

@@ -12,7 +12,7 @@ namespace ProgrammingIICraftDemoPages
     public class Game
     {
         int shopInteractionCount = 0;
-        int craftSuccess = 2;
+        CraftResults craftResult = CraftResults.craftNotActive;
 
         public Person Player = new Person()
         {
@@ -43,7 +43,6 @@ namespace ProgrammingIICraftDemoPages
         };
         public string Space = "      ";
 
-
         public List<Recipe> Recipes = new List<Recipe>();
 
         public Game() 
@@ -59,7 +58,7 @@ namespace ProgrammingIICraftDemoPages
             {
                 foreach(Item itemInRecipe in activeRecipe.RecipeRequirements)
                 {      
-                        if (craftSuccess == 0){ break; }
+                        if (craftResult == CraftResults.craftFailure){ break; }
                         Item? itemInPlayerInventory = Player.Inventory.Find(x=> x.ItemName == itemInRecipe.ItemName);
                         
                         //checks if item is in inventory
@@ -68,38 +67,38 @@ namespace ProgrammingIICraftDemoPages
                             //checks if theres enough of item
                             if(itemInPlayerInventory.ItemAmount >= itemInRecipe.ItemAmount)
                             {
-                                craftSuccess = 1;
+                                craftResult = CraftResults.craftSuccess;
                             }
                             else
                             {
-                                craftSuccess = 0;
-                                //TO DO: ADD FEEDBACK WHEN FAILED TO CRAFT
-                            }
+                                craftResult = CraftResults.craftFailure;
+                            //TO DO: ADD FEEDBACK WHEN FAILED TO CRAFT
+                        }
                         }
                         else
                         {
-                            craftSuccess = 0;
-                            //TO DO: PLAYER DOES NOT HAVE ENOUGH OF ITEM
-                            //ADD FEEDBACK
+                            craftResult = CraftResults.craftFailure;
+                        //TO DO: PLAYER DOES NOT HAVE ENOUGH OF ITEM
+                        //ADD FEEDBACK
                         }
                    }
             }
             else 
             {
-                craftSuccess = 0;
+                craftResult = CraftResults.craftFailure;
             }
             //bool recipetry = Recipes.Any(p => p.RecipeName = selectedRecipe.ToString());
 
             //add the item to the player's inventory
-            switch(craftSuccess) 
+            switch(craftResult) 
             {
-                case 0:
+                case CraftResults.craftFailure:
                     {
                         //TO DO: Add feedback
-                        
+                        craftResult = CraftResults.craftNotActive;
                         return false;
                     }
-                case 1:
+                case CraftResults.craftSuccess:
                     {
                         foreach (Item itemInRecipe in activeRecipe.RecipeRequirements)
                         {
@@ -113,6 +112,7 @@ namespace ProgrammingIICraftDemoPages
                         }
 
                         Player.Inventory.Add(activeRecipe.CraftedRecipe);
+                        craftResult = CraftResults.craftNotActive;
                         return true;
                         
                     }

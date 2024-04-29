@@ -15,18 +15,18 @@
         <Button Content="Buy" HorizontalAlignment="Left" Margin="24,353,0,0" VerticalAlignment="Top" Height="73" Width="142" Background="#FFBCD4E6" FontSize="36" Click="Buy_Click"/>
         <Button Content="Sell" HorizontalAlignment="Left" Margin="192,353,0,0" VerticalAlignment="Top" Height="73" Width="142" Background="#FFBCD4E6" FontSize="36" Click="Sell_Click"/>
 
-        <Rectangle Height="79" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,26,0,0"/>
-        <TextBlock Name="TraderConversation" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="79" Width="310"/>
+        <Rectangle Height="40" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,26,0,0"/>
+        <TextBlock Name="TraderConversation" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="40" Width="310"/>
 
         <Rectangle Height="207" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,123,0,0"/>
-        <ListView ItemsSource="{Binding TradeList}" Name="TradeInventory" Margin="24,124,24,124">
+        <ListView ItemsSource="{Binding TradeList}" Name="TradeInventory" Margin="24,92,24,124">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Name ="ItemsForTradeList"  Orientation="Horizontal">
                         <TextBlock Name="TradeItemName" Width="220" Text="{Binding ItemDescription}"/>
                         <StackPanel Name="ItemAmountCounter" Orientation="Horizontal">
                             <Button Name="IncrementItem" Content=" ▲ " Click="Increment_Click"/>
-                            <TextBlock Name="ItemCount" Text="  0" Width="20"/>
+                            <TextBlock Name="ItemCount" Text="{Binding BuyingItemCount}" Width="20"/>
                             <Button Name="DecrementItem" Content=" ▼ " Click="Decrement_Click"/>
                         </StackPanel>
                     </StackPanel>

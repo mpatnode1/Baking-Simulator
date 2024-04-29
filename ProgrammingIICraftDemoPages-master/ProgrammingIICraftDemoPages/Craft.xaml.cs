@@ -66,7 +66,7 @@ namespace ProgrammingIICraftDemoPages
         {
             mainWindow.Craft.Visibility = Visibility.Collapsed;
             mainWindow.Trade.Visibility = Visibility.Visible;
-            //mainWindow.Inventory.Visibility = Visibility.Visible;
+            mainWindow.Sell.Visibility = Visibility.Visible;
         }
 
         
@@ -76,7 +76,7 @@ namespace ProgrammingIICraftDemoPages
             FeedbackText.Text = string.Empty;
 
            //takes selected item in from menu and tries to craft it 
-           MenuItem selectedRecipe = (MenuItem)RecipeTreeView.SelectedItem;
+            MenuItem selectedRecipe = (MenuItem)RecipeTreeView.SelectedItem;
      
             Recipe result;
 

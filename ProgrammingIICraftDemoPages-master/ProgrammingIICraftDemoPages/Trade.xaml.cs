@@ -22,13 +22,17 @@ namespace ProgrammingIICraftDemoPages
     /// </summary>
     public partial class Trade : Page
     {
+        string BuyingItemCount;
+
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        TradeViewModel tradeViewModel;
+
         public Trade()
         {
 
             InitializeComponent();
 
-            TradeViewModel tradeViewModel = new TradeViewModel();
+            tradeViewModel = new TradeViewModel();
             foreach (Item item in mainWindow.game.Vendor.Inventory)
             {
                 tradeViewModel.TradeList.Add(item);
@@ -46,8 +50,6 @@ namespace ProgrammingIICraftDemoPages
             TraderConversationUpdate();
 
             //TradeInventory.Text  = mainWindow.game.Vendor.GetInventoryItemList();
-
-
         }
 
         private void TraderConversationUpdate()
@@ -59,7 +61,7 @@ namespace ProgrammingIICraftDemoPages
         private void SetButtonVisibility()
         {
             mainWindow.Trade.Visibility = Visibility.Collapsed;
-            //mainWindow.Inventory.Visibility = Visibility.Visible;
+            mainWindow.Sell.Visibility = Visibility.Visible;
             mainWindow.Craft.Visibility = Visibility.Visible;
         }
 
@@ -75,6 +77,15 @@ namespace ProgrammingIICraftDemoPages
         private void Increment_Click(object sender, RoutedEventArgs e)
         {
 
+            //get index of increment click button in tradelist that was clicked
+            //find item at that index in tradelist
+            //take that item and increment the buying count by 1
+            
+            //int itemToBuyIndex = tradeViewModel.TradeList.IndexOf(x => x.Button == sender);
+
+            //Item ItemToBuy = (Item)TradeInventory;      
+            //ItemToBuy.BuyingCount++;
+            //BuyingItemCount = $" {ItemToBuy.BuyingCount}";
         }
         private void Decrement_Click(object sender, RoutedEventArgs e)
         {

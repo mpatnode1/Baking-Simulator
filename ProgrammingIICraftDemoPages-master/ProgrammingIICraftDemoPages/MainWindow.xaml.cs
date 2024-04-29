@@ -62,6 +62,11 @@ namespace ProgrammingIICraftDemoPages
             ContentFrame.Navigate(new Uri("Trade.xaml", UriKind.Relative));
         }
 
+        private void Sell_Click(object sender, RoutedEventArgs e)
+        {
+
+            ContentFrame.Navigate(new Uri("Sell.xaml", UriKind.Relative));
+        }
         /*private void Inventory_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new Uri("Main.xaml", UriKind.Relative));

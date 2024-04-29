@@ -13,11 +13,11 @@
 
         <Button Content="Sell" HorizontalAlignment="Center" Margin="0,353,0,0" VerticalAlignment="Top" Height="73" Width="310" Background="#FFBCD4E6" FontSize="36" Click="SellConfirm_Click"/>
 
-        <Rectangle Height="79" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,26,0,0"/>
-        <TextBlock Name="SellFeedbackWindow" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="79" Width="310"/>
+        <Rectangle Height="40" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,26,0,0"/>
+        <TextBlock Name="SellFeedbackWindow" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="40" Width="310"/>
 
         <Rectangle Height="207" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,123,0,0"/>
-        <ListView ItemsSource="{Binding InventorySellList}" Name="SellInventory" Margin="24,124,24,124">
+        <ListView ItemsSource="{Binding InventorySellList}" Name="SellInventory" Margin="24,92,24,124">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
