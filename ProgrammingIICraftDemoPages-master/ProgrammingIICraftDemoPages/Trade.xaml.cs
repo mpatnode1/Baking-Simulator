@@ -62,7 +62,7 @@ namespace ProgrammingIICraftDemoPages
 
         private void TraderConversationUpdate()
         {
-            TraderConversation.Text = mainWindow.game.VendorIntroduction();
+            TraderConversation.Text = mainWindow.game.Vendor.VendorIntroduction(mainWindow.game);
                
         }
 
@@ -87,6 +87,12 @@ namespace ProgrammingIICraftDemoPages
             //if player does have enough currency
             //take item in for loop and add it to inventory 
             //reset buying count  
+
+            bool playerBuySuccess = mainWindow.game.CheckAbilityToBuyItems();
+            if (playerBuySuccess) 
+            { }
+            else 
+            { }
         }
 
         private void Increment_Click(object sender, RoutedEventArgs e)

@@ -8,7 +8,8 @@ namespace ProgrammingIICraftDemoPages
 {
     public class Person
     {
-        public string PersonName = "Anonymous";
+        private string personName = "Anonymous Baker";
+        public string PersonName { get { return personName; } set{ personName = value; } } 
         public double PersonCurrency = 10.00;
 
         public List<Item> Inventory = new List<Item>();
@@ -25,9 +26,9 @@ namespace ProgrammingIICraftDemoPages
             return output;
         }
 
-        public void SetDefaultName()
+        public virtual void SetDefaultName()
         {
-            PersonName = GetRandomName();
+            this.PersonName += GetRandomName();
         }
 
         public string GetRandomName()

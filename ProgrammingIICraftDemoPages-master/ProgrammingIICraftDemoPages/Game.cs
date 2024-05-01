@@ -11,7 +11,7 @@ namespace ProgrammingIICraftDemoPages
 {
     public class Game
     {
-        int shopInteractionCount = 0;
+        
         CraftResults craftResult = CraftResults.craftNotActive;
 
         public Person Player = new Person()
@@ -24,7 +24,7 @@ namespace ProgrammingIICraftDemoPages
             new Item(){ItemName = "Milk", ItemAmount = 4, ItemAmountType="tbsps", ItemValue = 4.25 }
              }
         };
-        public Person Vendor = new Person()
+        public Vendor Vendor = new Vendor()
         {
             Inventory = new List<Item>
         {
@@ -41,6 +41,7 @@ namespace ProgrammingIICraftDemoPages
             new Item(){ItemName = "Sugar", ItemAmount = 10, ItemAmountType="cups", ItemValue = 3.49 },
              }
         };
+
         public string Space = "      ";
 
         public List<Recipe> Recipes = new List<Recipe>();
@@ -121,7 +122,7 @@ namespace ProgrammingIICraftDemoPages
             return false;
         }
 
-        public void CheckAbilityToBuyItems()
+        public bool CheckAbilityToBuyItems()
         {
 
             double itemsTotal = 0;
@@ -134,17 +135,40 @@ namespace ProgrammingIICraftDemoPages
                     itemsTotal += item.ItemValue * item.BuyingCount;
                 }
             }
-
+            
             //adds item to player inventory and removes corresponding money amount
-            if(itemsTotal <= Player.PersonCurrency)
+            if (itemsTotal <= Player.PersonCurrency)
             {
                 foreach (Item item in Vendor.Inventory)
                 {
                     //doesn't go through items that the player isn't buying
                     if(item.BuyingCount < 0)
                     {
-                        Player.Inventory.Add(item);
-                        
+                        //if player has item in inventory add to item amount
+                        //if not create new item
+
+                        if (Player.Inventory.Any(x => x.ItemName == item.ItemName))
+                        {
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == item.ItemName);
+                            if (itemInPlayerInventory != null) 
+                            { 
+                                itemInPlayerInventory.ItemAmount += item.BuyingCount;
+                                itemInPlayerInventory.BuyingCount = 0;
+                            }
+                            
+                            
+                        }
+                        else
+                        {
+                            Player.Inventory.Add(item);
+
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == item.ItemName);
+                            if (itemInPlayerInventory != null)
+                            {
+                                itemInPlayerInventory.ItemAmount = item.BuyingCount;
+                                itemInPlayerInventory.BuyingCount = 0;
+                            }
+                        }
 
                         item.ItemAmount -= item.BuyingCount;
 
@@ -152,34 +176,20 @@ namespace ProgrammingIICraftDemoPages
                         if (item.ItemAmount <= 0)
                         {
                             Vendor.Inventory.Remove(item);
-
+                           
                         }
 
-                        
+                       
                     }
-                }
-            }
-            else
-            {
-                //TO DO ADD RETURN FALSE
-            }
-        }
 
-        public string VendorIntroduction()
-        {
-            string output = "";
-            if (shopInteractionCount == 0)
-            {
-                output += $"Welcome to my shop {Player.PersonName}. My name is {Vendor.PersonName}.\n";
-                shopInteractionCount++;
-                //TO DO when buy button is complete move shop interaction ++ to there
+                }
+                return true;
             }
             else
             {
-                output += $"Would you like to buy anything else, {Player.PersonName}?\n";
-                output += $"These are the wares I have left:\n";
+                return false;
             }
-            return output;
+          
         }
 
         public void RecipeSetUp()
