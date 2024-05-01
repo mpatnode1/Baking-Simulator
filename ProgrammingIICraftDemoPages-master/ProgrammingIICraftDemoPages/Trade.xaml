@@ -12,8 +12,7 @@
         <Rectangle HorizontalAlignment="Center" Height="456" Fill="#FDE2E4" VerticalAlignment="Center" Width="592"/>
 
 
-        <Button Content="Buy" HorizontalAlignment="Left" Margin="24,353,0,0" VerticalAlignment="Top" Height="73" Width="142" Background="#FFBCD4E6" FontSize="36" Click="Buy_Click"/>
-        <Button Content="Sell" HorizontalAlignment="Left" Margin="192,353,0,0" VerticalAlignment="Top" Height="73" Width="142" Background="#FFBCD4E6" FontSize="36" Click="Sell_Click"/>
+        <Button Content="Buy" HorizontalAlignment="Center" Margin="0,353,0,0" VerticalAlignment="Top" Height="73" Width="310" Background="#FFBCD4E6" FontSize="36" Click="Buy_Click"/>
 
         <Rectangle Height="40" Fill="White" VerticalAlignment="Top" Width="310" HorizontalAlignment="Center" Margin="0,26,0,0"/>
         <TextBlock Name="TraderConversation" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="40" Width="310"/>
@@ -23,10 +22,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Name ="ItemsForTradeList"  Orientation="Horizontal">
-                        <TextBlock Name="TradeItemName" Width="220" Text="{Binding ItemDescription}"/>
+                        <TextBlock Name="TradeItemName" Width="212" Text="{Binding ItemDescription}"/>
                         <StackPanel Name="ItemAmountCounter" Orientation="Horizontal">
-                            <Button Name="IncrementItem" Content=" ▲ " Click="Increment_Click"/>
-                            <TextBlock Name="ItemCount" Text="{Binding BuyingItemCount}" Width="20"/>
+                            <Button Name="IncrementItem" Content=" ▲ " Click="Increment_Click" Tag="{Binding ItemName}"/>
+                            <TextBlock Name="ItemCount" Text="{Binding BuyingCount}" Width="15" Margin="8,0,0,0"/>
                             <Button Name="DecrementItem" Content=" ▼ " Click="Decrement_Click"/>
                         </StackPanel>
                     </StackPanel>

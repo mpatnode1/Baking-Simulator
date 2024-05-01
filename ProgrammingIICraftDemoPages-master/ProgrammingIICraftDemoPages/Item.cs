@@ -9,7 +9,7 @@ namespace ProgrammingIICraftDemoPages
 {
     public class Item
     {
-        public string ItemName = "";
+        public string ItemName { get; set; }
         public string ItemDescription 
         {
             get { return GetItemDescription(); }
@@ -20,7 +20,7 @@ namespace ProgrammingIICraftDemoPages
         public double ItemAmount = 1;
         public string ItemAmountType = "cup(s)";
         public double CurrentItemValue { get; set; }
-        public int BuyingCount = 0;
+        public int BuyingCount {get; set; }
 
         public string GetItemDescription()
         {

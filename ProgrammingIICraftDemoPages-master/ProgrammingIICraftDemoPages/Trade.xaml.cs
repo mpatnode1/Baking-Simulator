@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,7 +24,7 @@ namespace ProgrammingIICraftDemoPages
     /// </summary>
     public partial class Trade : Page
     {
-        string BuyingItemCount;
+
 
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         TradeViewModel tradeViewModel;
@@ -33,6 +35,13 @@ namespace ProgrammingIICraftDemoPages
             InitializeComponent();
 
             tradeViewModel = new TradeViewModel();
+            updateTradeList();
+        }
+
+        private void updateTradeList()
+        {
+            tradeViewModel.TradeList.Clear();
+
             foreach (Item item in mainWindow.game.Vendor.Inventory)
             {
                 tradeViewModel.TradeList.Add(item);
@@ -41,7 +50,6 @@ namespace ProgrammingIICraftDemoPages
 
             }
             this.DataContext = tradeViewModel;
-
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -67,25 +75,31 @@ namespace ProgrammingIICraftDemoPages
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
+            //this needs a check before it even starts to decide if player has enough
+            //otherwise first items checked will be added to player inventory
 
-        }
-        private void Sell_Click(object sender, RoutedEventArgs e)
-        {
 
+            //for each item item in traders inventory
+            //take item and for loop of buying count
+            //check if player has enough currency in account
+            //if not fail
+
+            //if player does have enough currency
+            //take item in for loop and add it to inventory 
+            //reset buying count  
         }
 
         private void Increment_Click(object sender, RoutedEventArgs e)
         {
 
-            //get index of increment click button in tradelist that was clicked
-            //find item at that index in tradelist
-            //take that item and increment the buying count by 1
-            
-            //int itemToBuyIndex = tradeViewModel.TradeList.IndexOf(x => x.Button == sender);
+            var itemSelected = ((Button)sender).Tag;
+            Debug.WriteLine(itemSelected.ToString());
 
-            //Item ItemToBuy = (Item)TradeInventory;      
-            //ItemToBuy.BuyingCount++;
-            //BuyingItemCount = $" {ItemToBuy.BuyingCount}";
+            
+            Item? itemToIncrement = mainWindow.game.Vendor.Inventory.Find(x => x.ItemName == itemSelected);
+            itemToIncrement.BuyingCount++;
+            updateTradeList();
+
         }
         private void Decrement_Click(object sender, RoutedEventArgs e)
         {
@@ -96,6 +110,7 @@ namespace ProgrammingIICraftDemoPages
     public class TradeViewModel 
     {
         public ObservableCollection<Item> TradeList { get; set; } = new ObservableCollection<Item>();
+
 
     }
 }

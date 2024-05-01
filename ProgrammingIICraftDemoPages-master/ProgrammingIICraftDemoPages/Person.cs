@@ -32,7 +32,9 @@ namespace ProgrammingIICraftDemoPages
 
         public string GetRandomName()
         {
-            return defaultNames[new Random().Next(defaultNames.Count)]; ;
+            string namePicked = defaultNames[new Random().Next(defaultNames.Count)];
+            defaultNames.Remove(namePicked);
+            return namePicked;
         }
     }
 }

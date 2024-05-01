@@ -121,6 +121,50 @@ namespace ProgrammingIICraftDemoPages
             return false;
         }
 
+        public void CheckAbilityToBuyItems()
+        {
+
+            double itemsTotal = 0;
+
+            //checks if player has enough currency for the items they want to buy
+            foreach (Item item in Vendor.Inventory)
+            {
+                if (item.BuyingCount < 0)
+                {
+                    itemsTotal += item.ItemValue * item.BuyingCount;
+                }
+            }
+
+            //adds item to player inventory and removes corresponding money amount
+            if(itemsTotal <= Player.PersonCurrency)
+            {
+                foreach (Item item in Vendor.Inventory)
+                {
+                    //doesn't go through items that the player isn't buying
+                    if(item.BuyingCount < 0)
+                    {
+                        Player.Inventory.Add(item);
+                        
+
+                        item.ItemAmount -= item.BuyingCount;
+
+                        //removes item from vendor if they buy out inventory
+                        if (item.ItemAmount <= 0)
+                        {
+                            Vendor.Inventory.Remove(item);
+
+                        }
+
+                        
+                    }
+                }
+            }
+            else
+            {
+                //TO DO ADD RETURN FALSE
+            }
+        }
+
         public string VendorIntroduction()
         {
             string output = "";
