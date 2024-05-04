@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProgrammingIICraftDemoPages"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
        d:DesignHeight="456" d:DesignWidth="358"
       Title="Buy">
@@ -24,9 +25,17 @@
                     <StackPanel Name ="ItemsForTradeList"  Orientation="Horizontal">
                         <TextBlock Name="TradeItemName" Width="212" Text="{Binding ItemDescription}"/>
                         <StackPanel Name="ItemAmountCounter" Orientation="Horizontal">
-                            <Button Name="IncrementItem" Content=" ▲ " Click="Increment_Click" Tag="{Binding ItemName}"/>
+                            <Button Name="IncrementItem" Content=" ▲ ">
+                                <Button.Command>
+                                    <Binding Path="IncreaseCountCommand"/>
+                                </Button.Command>
+                            </Button>
                             <TextBlock Name="ItemCount" Text="{Binding BuyingCount}" Width="15" Margin="8,0,0,0"/>
-                            <Button Name="DecrementItem" Content=" ▼ " Click="Decrement_Click"/>
+                            <Button Name="DecrementItem" Content=" ▼ ">
+                                <Button.Command>
+                                    <Binding Path="DecreaseCountCommand"/>
+                                </Button.Command>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

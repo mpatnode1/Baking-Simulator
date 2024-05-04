@@ -19,7 +19,7 @@ namespace ProgrammingIICraftDemoPages
         public override void SetDefaultName()
         {
 
-            this.PersonName = "ShopKeep";
+            this.PersonName = "ShopKeep ";
             base.SetDefaultName();
         }
 

@@ -122,72 +122,96 @@ namespace ProgrammingIICraftDemoPages
             return false;
         }
 
-        public bool CheckAbilityToBuyItems()
+        public int CheckAbilityToBuyItems()
         {
 
             double itemsTotal = 0;
+            bool itemFound = false;
+            List<Item> ToDelete = new List<Item>();
 
             //checks if player has enough currency for the items they want to buy
             foreach (Item item in Vendor.Inventory)
             {
-                if (item.BuyingCount < 0)
+                if (item.BuyingCount > 0)
                 {
                     itemsTotal += item.ItemValue * item.BuyingCount;
+                    itemFound = true;
                 }
             }
-            
+
+            if (itemFound == false)
+            {
+                Debug.WriteLine("No items found with buying count higher than 1");
+                return 3;
+            }
+                        
             //adds item to player inventory and removes corresponding money amount
             if (itemsTotal <= Player.PersonCurrency)
             {
+                Debug.WriteLine("Player has enough currency.");
                 foreach (Item item in Vendor.Inventory)
                 {
+
                     //doesn't go through items that the player isn't buying
-                    if(item.BuyingCount < 0)
+                    if(item.BuyingCount > 0)
                     {
+                        Debug.WriteLine(item.BuyingCount);
                         //if player has item in inventory add to item amount
                         //if not create new item
 
                         if (Player.Inventory.Any(x => x.ItemName == item.ItemName))
                         {
+                            Debug.WriteLine("Item found in player inventory.");
                             Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == item.ItemName);
                             if (itemInPlayerInventory != null) 
-                            { 
+                            {
                                 itemInPlayerInventory.ItemAmount += item.BuyingCount;
                                 itemInPlayerInventory.BuyingCount = 0;
+                                Debug.WriteLine("Item amount for preexisting item in player inventory was increased.");
                             }
                             
                             
                         }
                         else
                         {
-                            Player.Inventory.Add(item);
+                            Item cloneForPlayerInventory = item.GetMemberwiseClone();
+                            Player.Inventory.Add(cloneForPlayerInventory);
 
                             Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == item.ItemName);
                             if (itemInPlayerInventory != null)
                             {
                                 itemInPlayerInventory.ItemAmount = item.BuyingCount;
                                 itemInPlayerInventory.BuyingCount = 0;
+                                Debug.WriteLine("Item added to player inventory was found.");
                             }
+                            Debug.WriteLine("New item was added to player inventory.");
                         }
-
                         item.ItemAmount -= item.BuyingCount;
+                        item.BuyingCount = 0;
 
                         //removes item from vendor if they buy out inventory
                         if (item.ItemAmount <= 0)
                         {
-                            Vendor.Inventory.Remove(item);
-                           
+                            ToDelete.Add(item);
+                            Debug.WriteLine("Removing item from vendor inventory.");
                         }
 
                        
                     }
 
                 }
-                return true;
+
+                foreach(Item item in ToDelete)
+                {
+                    Vendor.Inventory.Remove(item);    
+                }
+
+                Player.PersonCurrency -= itemsTotal;
+                return 1;
             }
             else
             {
-                return false;
+                return 2;
             }
           
         }

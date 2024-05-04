@@ -28,11 +28,11 @@ namespace ProgrammingIICraftDemoPages
            
             InitializeComponent();
             //InventoryText.Text = mainWindow.game.Player.GetInventoryItemList();
-            UpdateInventory();
+            UpdateInventoryWindow();
             
         }
 
-        public void UpdateInventory()
+        public void UpdateInventoryWindow()
         {
             InventoryView inventoryview = new InventoryView();
 

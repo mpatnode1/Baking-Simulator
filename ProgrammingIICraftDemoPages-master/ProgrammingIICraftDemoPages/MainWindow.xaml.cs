@@ -40,9 +40,14 @@ namespace ProgrammingIICraftDemoPages
         {
             ContentFrame.Navigate(new Main());
             PlayerName.Text = game.Player.PersonName;
-            Currency.Text = game.Player.PersonCurrency.ToString("C");
+            UpdateCurrency();
 
             InventoryFrame.Navigate(inventory);
+        }
+
+        public void UpdateCurrency()
+        {
+            Currency.Text = game.Player.PersonCurrency.ToString("C");
         }
 
         #region EventHandlers

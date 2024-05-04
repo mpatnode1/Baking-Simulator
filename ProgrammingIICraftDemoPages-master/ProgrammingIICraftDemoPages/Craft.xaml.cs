@@ -86,7 +86,7 @@ namespace ProgrammingIICraftDemoPages
             if(craftSuccess)
             {
                 FeedbackText.Text = "Recipe made! Item has been added to your inventory.";
-                mainWindow.inventory.UpdateInventory();
+                mainWindow.inventory.UpdateInventoryWindow();
             }
             else
             {

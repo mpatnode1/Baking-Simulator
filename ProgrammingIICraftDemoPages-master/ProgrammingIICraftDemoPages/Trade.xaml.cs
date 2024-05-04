@@ -78,21 +78,28 @@ namespace ProgrammingIICraftDemoPages
             //this needs a check before it even starts to decide if player has enough
             //otherwise first items checked will be added to player inventory
 
+            int buySuccess = mainWindow.game.CheckAbilityToBuyItems();
 
-            //for each item item in traders inventory
-            //take item and for loop of buying count
-            //check if player has enough currency in account
-            //if not fail
+            if (buySuccess == 1)
+            {
+                //bought
+                TraderConversation.Text = "Here you go. I've added it to your inventory.";
 
-            //if player does have enough currency
-            //take item in for loop and add it to inventory 
-            //reset buying count  
-
-            bool playerBuySuccess = mainWindow.game.CheckAbilityToBuyItems();
-            if (playerBuySuccess) 
-            { }
-            else 
-            { }
+                //update inventory
+                mainWindow.inventory.UpdateInventoryWindow();
+                updateTradeList();
+                mainWindow.UpdateCurrency();
+                
+                
+            }
+            else if(buySuccess == 2)
+            {
+                TraderConversation.Text = "I'm sorry, it looks like you don't have enough.";
+            }
+            else
+            {
+                TraderConversation.Text = "Please select an item first.";
+            }
         }
 
         private void Increment_Click(object sender, RoutedEventArgs e)
@@ -102,14 +109,20 @@ namespace ProgrammingIICraftDemoPages
             Debug.WriteLine(itemSelected.ToString());
 
             
-            Item? itemToIncrement = mainWindow.game.Vendor.Inventory.Find(x => x.ItemName == itemSelected);
+            Item? itemToIncrement = mainWindow.game.Vendor.Inventory.Find(x => x.ItemName == itemSelected.ToString());
             itemToIncrement.BuyingCount++;
             updateTradeList();
 
         }
         private void Decrement_Click(object sender, RoutedEventArgs e)
         {
+            var itemSelected = ((Button)sender).Tag;
+            Debug.WriteLine(itemSelected.ToString());
 
+
+            Item? itemToDecrement = mainWindow.game.Vendor.Inventory.Find(x => x.ItemName == itemSelected.ToString());
+            itemToDecrement.BuyingCount--;
+            updateTradeList();
         }
     }
 
