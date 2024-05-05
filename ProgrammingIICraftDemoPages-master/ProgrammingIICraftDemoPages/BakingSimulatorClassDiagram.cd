@@ -30,7 +30,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ProgrammingIICraftDemoPages.Game">
-    <Position X="15.25" Y="1.75" Width="2.5" />
+    <Position X="9.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>EAAAACAAAQAAAAAAIAQIIAgAAgQAABBAAAAAAQCBAAA=</HashCode>
       <FileName>Game.cs</FileName>
@@ -45,16 +45,16 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ProgrammingIICraftDemoPages.InventoryView">
-    <Position X="6.5" Y="4" Width="2.75" />
+    <Position X="6.5" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Inventory.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProgrammingIICraftDemoPages.Item" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="0.5" Width="2" />
+    <Position X="15" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAEAhAACAIAQAAQAAAAAAAAggACAAgAEAAAAAAACgA=</HashCode>
+      <HashCode>ACAEAhAACAIAQAAQAAAAACAAggACABgAEAAAAAgACgA=</HashCode>
       <FileName>Item.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />

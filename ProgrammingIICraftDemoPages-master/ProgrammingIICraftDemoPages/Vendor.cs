@@ -13,11 +13,7 @@ namespace ProgrammingIICraftDemoPages
     {
         private int shopInteractionCount = 0;
         public int ShopInteractionCount { get { return shopInteractionCount; } set { shopInteractionCount = value; } }
-        public Vendor() 
-        { 
-                   
-        }
-
+   
         public override void SetDefaultName(Game game)
         {
 

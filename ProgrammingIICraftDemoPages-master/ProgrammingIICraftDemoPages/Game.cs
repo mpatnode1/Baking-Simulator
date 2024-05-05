@@ -12,7 +12,7 @@ namespace ProgrammingIICraftDemoPages
 {
     public class Game
     {
-        
+
         CraftResults craftResult = CraftResults.craftNotActive;
 
         public Person Player = new Person()
@@ -22,7 +22,8 @@ namespace ProgrammingIICraftDemoPages
             new Item() {ItemName="Chocolate", ItemAmount = 3, ItemValue = 9.99, ItemAmountType = "pound(s)"},
             new Item() {ItemName="Water", ItemAmount = 10, ItemValue = .10, ItemAmountType = "cup(s)"},
             new Item(){ItemName = "Vanilla Extract", ItemAmount = 2, ItemAmountType = "tsp", ItemValue = 2.67 },
-            new Item(){ItemName = "Milk", ItemAmount = 4, ItemAmountType="tbsps", ItemValue = 4.25 }
+            new Item(){ItemName = "Milk", ItemAmount = 4, ItemAmountType="tbsps", ItemValue = 4.25 },
+            new Item(){ItemName = "Powdered Sugar", ItemAmount = 1, ItemAmountType="cup", ItemValue = 1.95 },
              }
         };
         public Vendor Vendor = new Vendor()
@@ -51,7 +52,7 @@ namespace ProgrammingIICraftDemoPages
         public List<string> defaultNames = new List<string>();
 
         //this is referenced to "restock" vendor's inventory
-        public List<Item> AllActiveItemsInGame = new List<Item>() 
+        public List<Item> AllActiveItemsInGame = new List<Item>()
         {
             new Item() {ItemName="Chocolate", ItemAmount = 1, ItemAmountType = "pound(s)", ItemValue = 9.99},
             new Item(){ItemName = "Vanilla Extract", ItemAmount = 1, ItemAmountType = "tsp", ItemValue = 2.67 },
@@ -67,6 +68,8 @@ namespace ProgrammingIICraftDemoPages
         };
 
         public int VendorRestockCounter = 0;
+
+      
         public Game() 
         {
             LoadNameData();
@@ -120,8 +123,7 @@ namespace ProgrammingIICraftDemoPages
             switch(craftResult) 
             {
                 case CraftResults.craftFailure:
-                    {
-                        //TO DO: Add feedback
+                    { 
                         craftResult = CraftResults.craftNotActive;
                         return false;
                     }
@@ -138,9 +140,12 @@ namespace ProgrammingIICraftDemoPages
                             }
                         }
 
-                        if (Player.Inventory.Any(x => x.ItemName == activeRecipe.CraftedRecipe.ItemName))
+                        Item cloneForPlayerInventory = activeRecipe.CraftedRecipe.GetMemberwiseClone();
+                        cloneForPlayerInventory.QualityMultiplerCalculator();
+
+                        if (Player.Inventory.Any(x => x.ItemName == cloneForPlayerInventory.ItemName))
                         {
-                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == activeRecipe.CraftedRecipe.ItemName);
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == cloneForPlayerInventory.ItemName);
                             if (itemInPlayerInventory != null)
                             {
                                 itemInPlayerInventory.ItemAmount += activeRecipe.CraftedRecipe.ItemAmount;
@@ -148,10 +153,9 @@ namespace ProgrammingIICraftDemoPages
                         }
                         else
                         {
-                            Item cloneForPlayerInventory = activeRecipe.CraftedRecipe.GetMemberwiseClone();
                             Player.Inventory.Add(cloneForPlayerInventory);
 
-                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == activeRecipe.CraftedRecipe.ItemName);
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == cloneForPlayerInventory.ItemName);
                             if (itemInPlayerInventory != null)
                             {
                                 itemInPlayerInventory.ItemAmount = activeRecipe.CraftedRecipe.ItemAmount;

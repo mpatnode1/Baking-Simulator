@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -23,6 +24,10 @@ namespace ProgrammingIICraftDemoPages
         public double ItemValue = 0;
         public double ItemAmount = 1;
         public string ItemAmountType = "cup(s)";
+        public double ItemQualityMultipler = 1;
+        public string ItemQuality = "Common";
+
+        private List<double> craftingProbabilityList = new List<double> { 1, 1, 1, 1, 1, 1, 1, 1.7, 1.4, 1.4 };
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -41,7 +46,27 @@ namespace ProgrammingIICraftDemoPages
             IncreaseCountCommand.siblingChanged = DecreaseCountCommand.Changed;
             DecreaseCountCommand.siblingChanged = IncreaseCountCommand.Changed;
         }
-       
+        public void QualityMultiplerCalculator()
+        {
+            Random rnd = new Random();
+            int valueMultiplierIndex = rnd.Next(craftingProbabilityList.Count);
+            double valueMultiplier = craftingProbabilityList[valueMultiplierIndex];
+
+            if(valueMultiplier == 1)
+            {
+                return;
+            }
+            else if (valueMultiplier == 1.4)
+            {
+                ItemValue *= valueMultiplier;
+                ItemName = $"Uncommon " + ItemName;
+            }
+            else if(valueMultiplier == 1.7)
+            {
+                ItemValue *= valueMultiplier;
+                ItemName = $"Rare " + ItemName;
+            }
+        }
         public Item GetMemberwiseClone()
         {
             return (Item)this.MemberwiseClone();

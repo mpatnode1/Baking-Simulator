@@ -10,7 +10,7 @@ namespace ProgrammingIICraftDemoPages
     {
         private string personName = "Anonymous Baker";
         public string PersonName { get { return personName; } set{ personName = value; } } 
-        public double PersonCurrency = 10.00;
+        public double PersonCurrency = 0;
 
         public List<Item> Inventory = new List<Item>();        
         
