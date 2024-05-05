@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ProgrammingIICraftDemoPages.App">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Craft" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="8.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAABBAEAAAAACAAAAAQAAA=</HashCode>
+      <FileName>Craft.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.MenuItem">
+    <Position X="0.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Craft.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Customer">
+    <Position X="4" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Game">
+    <Position X="15.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAACAAAQAAAAAAIAQIIAgAAgQAABBAAAAAAQCBAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Inventory" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Inventory.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.InventoryView">
+    <Position X="6.5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Inventory.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Item" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAhAACAIAQAAQAAAAAAAAggACAAgAEAAAAAAACgA=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.ChangeBuyCount" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="4.25" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="ProgrammingIICraftDemoPages.ChangeBuyCount.SiblingChanged" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Item.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAACAAQABEAAAAEIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Main" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIABCAEAAAAACAAAIBAAAA=</HashCode>
+      <FileName>Main.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAABgAAAgAAAAAAAAAAAAaACAAAgAAIAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Person">
+    <Position X="2.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAQAAAAYAAAAQAAAAAAAAAAIAgAAAAA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Recipe">
+    <Position X="9.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAiABgAAQIAAAAAAAAAAAAAAAAAAACAAACAAAAAAgAA=</HashCode>
+      <FileName>Recipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Sell" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAACBAAEAQQAAAAAAAAAAIA=</HashCode>
+      <FileName>Sell.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.SellInventoryView">
+    <Position X="6.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sell.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Trade" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="6.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAIAAAAAAAgAAAAAABAAEAAAAACAAAAAAAAE=</HashCode>
+      <FileName>Trade.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.TradeViewModel">
+    <Position X="2.25" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Trade.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammingIICraftDemoPages.Vendor">
+    <Position X="0.5" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAgAgAAAIAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vendor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ProgrammingIICraftDemoPages.CraftResults">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAABAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CraftResults.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
