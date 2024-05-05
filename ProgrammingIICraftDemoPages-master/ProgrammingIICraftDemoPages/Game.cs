@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace ProgrammingIICraftDemoPages
 {
@@ -28,67 +29,92 @@ namespace ProgrammingIICraftDemoPages
         {
             Inventory = new List<Item>
         {
-            new Item() {ItemName="Chocolate", ItemAmount = 10, ItemAmountType = "pound(s)", ItemValue = 9.99},
-            new Item(){ItemName = "Vanilla Extract", ItemAmount = 10, ItemAmountType = "tsp", ItemValue = 2.67 },
-            new Item(){ItemName = "Milk", ItemAmount = 10, ItemAmountType="tbsps", ItemValue = 4.25 },
-            new Item(){ItemName = "Powdered Sugar", ItemAmount = 10, ItemAmountType="cup", ItemValue = 1.95 },
-            new Item(){ItemName = "Banana", ItemAmount = 10, ItemAmountType="cups", ItemValue=0.99},
-            new Item(){ItemName = "Egg", ItemAmount = 10, ItemAmountType = "count", ItemValue = 3.89},
-            new Item(){ItemName = "Cocoa Powder", ItemAmount = 10, ItemAmountType = "cup", ItemValue = 2.50},
-            new Item(){ItemName = "Pudding Mix", ItemAmount = 10, ItemAmountType = "cups", ItemValue = 4.00},
-            new Item(){ItemName = "Vanilla Wafer", ItemAmount = 10, ItemAmountType = "count", ItemValue = 1.50},
-            new Item(){ItemName = "Flour", ItemAmount = 10, ItemAmountType="cup", ItemValue = 5.97 },
-            new Item(){ItemName = "Sugar", ItemAmount = 10, ItemAmountType="cups", ItemValue = 3.49 },
-             }
+            new Item() {ItemName="Chocolate", ItemAmount = 5, ItemAmountType = "pound(s)", ItemValue = 9.99},
+            new Item(){ItemName = "Vanilla Extract", ItemAmount = 5, ItemAmountType = "tsp", ItemValue = 2.67 },
+            new Item(){ItemName = "Milk", ItemAmount = 5, ItemAmountType="tbsps", ItemValue = 4.25 },
+            new Item(){ItemName = "Powdered Sugar", ItemAmount = 5, ItemAmountType="cup", ItemValue = 1.95 },
+            new Item(){ItemName = "Banana", ItemAmount = 5, ItemAmountType="cups", ItemValue=0.99},
+            new Item(){ItemName = "Egg", ItemAmount = 5, ItemAmountType = "count", ItemValue = 2.89},
+            new Item(){ItemName = "Cocoa Powder", ItemAmount = 5, ItemAmountType = "cup", ItemValue = 2.50},
+            new Item(){ItemName = "Pudding Mix", ItemAmount = 5, ItemAmountType = "cups", ItemValue = 4.00},
+            new Item(){ItemName = "Vanilla Wafer", ItemAmount = 5, ItemAmountType = "count", ItemValue = 1.50},
+            new Item(){ItemName = "Flour", ItemAmount = 5, ItemAmountType="cup", ItemValue = 5.97 },
+            new Item(){ItemName = "Sugar", ItemAmount = 5, ItemAmountType="cups", ItemValue = 3.49 },
+            }
         };
 
         public string Space = "      ";
 
         public List<Recipe> Recipes = new List<Recipe>();
 
+        string filePathForNames = "../../../data/DefaultNamesList.txt";
+        public List<string> defaultNames = new List<string>();
+
+        //this is referenced to "restock" vendor's inventory
+        public List<Item> AllActiveItemsInGame = new List<Item>() 
+        {
+            new Item() {ItemName="Chocolate", ItemAmount = 1, ItemAmountType = "pound(s)", ItemValue = 9.99},
+            new Item(){ItemName = "Vanilla Extract", ItemAmount = 1, ItemAmountType = "tsp", ItemValue = 2.67 },
+            new Item(){ItemName = "Milk", ItemAmount = 1, ItemAmountType="tbsps", ItemValue = 4.25 },
+            new Item(){ItemName = "Powdered Sugar", ItemAmount = 1, ItemAmountType="cup", ItemValue = 1.95 },
+            new Item(){ItemName = "Banana", ItemAmount = 1, ItemAmountType="cups", ItemValue=0.99},
+            new Item(){ItemName = "Egg", ItemAmount = 1, ItemAmountType = "count", ItemValue = 2.89},
+            new Item(){ItemName = "Cocoa Powder", ItemAmount = 1, ItemAmountType = "cup", ItemValue = 2.50},
+            new Item(){ItemName = "Pudding Mix", ItemAmount = 1, ItemAmountType = "cups", ItemValue = 4.00},
+            new Item(){ItemName = "Vanilla Wafer", ItemAmount = 1, ItemAmountType = "count", ItemValue = 1.50},
+            new Item(){ItemName = "Flour", ItemAmount = 1, ItemAmountType="cup", ItemValue = 5.97 },
+            new Item(){ItemName = "Sugar", ItemAmount = 1, ItemAmountType="cups", ItemValue = 3.49 },
+        };
+
+        public int VendorRestockCounter = 0;
         public Game() 
         {
+            LoadNameData();
             RecipeSetUp();
-            Vendor.SetDefaultName();
+            Vendor.SetDefaultName(this);
+            Vendor.RestockVendor(this);
         }
 
+        public void LoadNameData()
+        {
+            defaultNames = File.ReadAllLines(filePathForNames).ToList();
+        }
         public bool CheckAbilityToCraft(Recipe activeRecipe)
         {
-            //Recipe activeRecipe = Recipes.Find(x => x.RecipeName = selectedRecipe.ItemContent);
             if (activeRecipe != null)
             {
-                foreach(Item itemInRecipe in activeRecipe.RecipeRequirements)
-                {      
-                        if (craftResult == CraftResults.craftFailure){ break; }
-                        Item? itemInPlayerInventory = Player.Inventory.Find(x=> x.ItemName == itemInRecipe.ItemName);
-                        
-                        //checks if item is in inventory
-                        if(itemInPlayerInventory != null)
+                //goes through each item in recipe requirements
+                foreach (Item itemInRecipe in activeRecipe.RecipeRequirements)
+                {
+
+                    Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == itemInRecipe.ItemName);
+
+                    //checks if item is in inventory
+                    if (itemInPlayerInventory != null)
+                    {
+                        //checks if theres enough of item
+                        if (itemInPlayerInventory.ItemAmount >= itemInRecipe.ItemAmount)
                         {
-                            //checks if theres enough of item
-                            if(itemInPlayerInventory.ItemAmount >= itemInRecipe.ItemAmount)
-                            {
-                                craftResult = CraftResults.craftSuccess;
-                            }
-                            else
-                            {
-                                craftResult = CraftResults.craftFailure;
-                            //TO DO: ADD FEEDBACK WHEN FAILED TO CRAFT
-                        }
+                            craftResult = CraftResults.craftSuccess;
                         }
                         else
                         {
                             craftResult = CraftResults.craftFailure;
-                        //TO DO: PLAYER DOES NOT HAVE ENOUGH OF ITEM
-                        //ADD FEEDBACK
                         }
-                   }
+                    }
+                    else
+                    {
+                        craftResult = CraftResults.craftFailure;
+                    }
+
+                    //breaks for loop if any of the items in foreach loop fail
+                    if (craftResult == CraftResults.craftFailure) { break; }
+                }
             }
-            else 
+            else
             {
                 craftResult = CraftResults.craftFailure;
             }
-            //bool recipetry = Recipes.Any(p => p.RecipeName = selectedRecipe.ToString());
 
             //add the item to the player's inventory
             switch(craftResult) 
@@ -112,7 +138,26 @@ namespace ProgrammingIICraftDemoPages
                             }
                         }
 
-                        Player.Inventory.Add(activeRecipe.CraftedRecipe);
+                        if (Player.Inventory.Any(x => x.ItemName == activeRecipe.CraftedRecipe.ItemName))
+                        {
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == activeRecipe.CraftedRecipe.ItemName);
+                            if (itemInPlayerInventory != null)
+                            {
+                                itemInPlayerInventory.ItemAmount += activeRecipe.CraftedRecipe.ItemAmount;
+                            }
+                        }
+                        else
+                        {
+                            Item cloneForPlayerInventory = activeRecipe.CraftedRecipe.GetMemberwiseClone();
+                            Player.Inventory.Add(cloneForPlayerInventory);
+
+                            Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == activeRecipe.CraftedRecipe.ItemName);
+                            if (itemInPlayerInventory != null)
+                            {
+                                itemInPlayerInventory.ItemAmount = activeRecipe.CraftedRecipe.ItemAmount;
+                            }
+                     
+                        }
                         craftResult = CraftResults.craftNotActive;
                         return true;
                         
@@ -206,6 +251,7 @@ namespace ProgrammingIICraftDemoPages
                     Vendor.Inventory.Remove(item);    
                 }
 
+                Vendor.ShopInteractionCount++;
                 Player.PersonCurrency -= itemsTotal;
                 return 1;
             }
@@ -214,6 +260,41 @@ namespace ProgrammingIICraftDemoPages
                 return 2;
             }
           
+        }
+
+        public bool SellItemToCustomer(Item selectedItem)
+        {
+            if (Player.Inventory.Any(x => x.ItemName == selectedItem.ItemName))
+            {
+                Item? itemInPlayerInventory = Player.Inventory.Find(x => x.ItemName == selectedItem.ItemName);
+                if (itemInPlayerInventory != null)
+                {
+                    
+                    if (itemInPlayerInventory.ItemAmount >= 1)
+                    {
+                        Player.PersonCurrency += itemInPlayerInventory.ItemValue;
+                        itemInPlayerInventory.ItemAmount--;
+                    }
+                    else if(itemInPlayerInventory.ItemAmount < 1 && itemInPlayerInventory.ItemAmount > 0)
+                    {
+                        itemInPlayerInventory.ValueForCurrentItemAmount();
+                        Player.PersonCurrency += itemInPlayerInventory.CurrentItemValue;
+                        itemInPlayerInventory.ItemAmount = 0;
+
+                    }
+                    
+                    if (itemInPlayerInventory.ItemAmount <= 0)
+                    {
+                        Player.Inventory.Remove(itemInPlayerInventory);
+                    }
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void RecipeSetUp()
@@ -268,7 +349,7 @@ namespace ProgrammingIICraftDemoPages
                     {
                         new Item(){ItemName = "Powdered Sugar Icing", ItemAmount = 1.5, ItemAmountType="cups", ItemValue = 5.97 },
                         new Item(){ItemName = "Banana", ItemAmount = 2, ItemAmountType="cups", ItemValue=0.99},
-                        new Item(){ItemName = "Egg", ItemAmount = 3, ItemAmountType = "count", ItemValue = 3.89},
+                        new Item(){ItemName = "Egg", ItemAmount = 3, ItemAmountType = "count", ItemValue = 2.89},
                         new Item(){ItemName = "Cocoa Powder", ItemAmount = .5, ItemAmountType = "cup", ItemValue = 2.50}
                     }
                 }
@@ -320,7 +401,7 @@ namespace ProgrammingIICraftDemoPages
                  RecipeRequirements = new List<Item>()
                  {
                       new Item(){ItemName = "Powdered Sugar Icing", ItemAmount = 1.5, ItemAmountType="cups", ItemValue = 5.97 },
-                      new Item(){ItemName = "Egg", ItemAmount = 1.5, ItemAmountType="cup", ItemValue = 5.97 },
+                      new Item(){ItemName = "Egg", ItemAmount = 1.5, ItemAmountType="count", ItemValue = 2.89 },
                       new Item(){ItemName = "Flour", ItemAmount = 1.5, ItemAmountType="cup", ItemValue = 5.97 },
                       new Item(){ItemName = "Sugar", ItemAmount = 3, ItemAmountType="cups", ItemValue = 3.49 },
                  }
@@ -328,7 +409,6 @@ namespace ProgrammingIICraftDemoPages
              );
 
         }
-
 
         public string GetRecipeList()
         {
@@ -342,6 +422,13 @@ namespace ProgrammingIICraftDemoPages
             }
            
             return output;
+        }
+    
+        public Customer GetCustomer()
+        {
+            Customer currentCustomer = new Customer(this);
+            currentCustomer.SetDefaultName(this);
+            return currentCustomer; 
         }
     }
 }

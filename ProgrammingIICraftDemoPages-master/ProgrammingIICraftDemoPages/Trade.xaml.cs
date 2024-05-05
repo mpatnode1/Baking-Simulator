@@ -36,6 +36,12 @@ namespace ProgrammingIICraftDemoPages
 
             tradeViewModel = new TradeViewModel();
             updateTradeList();
+
+            if (mainWindow.game.VendorRestockCounter >= 3)
+            {
+                mainWindow.game.Vendor.RestockVendor(mainWindow.game);
+                mainWindow.game.VendorRestockCounter = 0;
+            }
         }
 
         private void updateTradeList()
@@ -80,6 +86,7 @@ namespace ProgrammingIICraftDemoPages
 
             int buySuccess = mainWindow.game.CheckAbilityToBuyItems();
 
+
             if (buySuccess == 1)
             {
                 //bought
@@ -89,40 +96,20 @@ namespace ProgrammingIICraftDemoPages
                 mainWindow.inventory.UpdateInventoryWindow();
                 updateTradeList();
                 mainWindow.UpdateCurrency();
+                mainWindow.game.VendorRestockCounter++;
                 
-                
+
+
             }
             else if(buySuccess == 2)
             {
                 TraderConversation.Text = "I'm sorry, it looks like you don't have enough.";
             }
+            // else if player doesnt have item selected.
             else
             {
                 TraderConversation.Text = "Please select an item first.";
             }
-        }
-
-        private void Increment_Click(object sender, RoutedEventArgs e)
-        {
-
-            var itemSelected = ((Button)sender).Tag;
-            Debug.WriteLine(itemSelected.ToString());
-
-            
-            Item? itemToIncrement = mainWindow.game.Vendor.Inventory.Find(x => x.ItemName == itemSelected.ToString());
-            itemToIncrement.BuyingCount++;
-            updateTradeList();
-
-        }
-        private void Decrement_Click(object sender, RoutedEventArgs e)
-        {
-            var itemSelected = ((Button)sender).Tag;
-            Debug.WriteLine(itemSelected.ToString());
-
-
-            Item? itemToDecrement = mainWindow.game.Vendor.Inventory.Find(x => x.ItemName == itemSelected.ToString());
-            itemToDecrement.BuyingCount--;
-            updateTradeList();
         }
     }
 

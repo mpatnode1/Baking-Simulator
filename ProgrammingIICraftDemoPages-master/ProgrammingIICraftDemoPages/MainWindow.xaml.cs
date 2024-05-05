@@ -30,6 +30,7 @@ namespace ProgrammingIICraftDemoPages
         public Game game = new Game();
 
         public Inventory inventory;
+        public bool InStartUpWindow = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,15 +39,21 @@ namespace ProgrammingIICraftDemoPages
 
         private void SetUp()
         {
+          
             ContentFrame.Navigate(new Main());
             PlayerName.Text = game.Player.PersonName;
             UpdateCurrency();
-
             InventoryFrame.Navigate(inventory);
         }
 
         public void UpdateCurrency()
         {
+            Currency.Text = game.Player.PersonCurrency.ToString("C");
+        }
+
+        private void Tips_Click(object sender, RoutedEventArgs e)
+        {
+            game.Player.PersonCurrency += 0.01;
             Currency.Text = game.Player.PersonCurrency.ToString("C");
         }
 

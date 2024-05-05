@@ -7,18 +7,20 @@
         mc:Ignorable="d"
         Title="Baking Simulator By Meghan Patnode" Height="600" Width="600">
     <Grid Loaded="Grid_Loaded">
+        <Frame x:Name="StartWindowFrame" NavigationUIVisibility="Hidden"/>
         <DockPanel HorizontalAlignment="Center" Width="600" Height="584" VerticalAlignment="Top">
             <Frame x:Name="ContentFrame" Margin="15,75,0,-32" NavigationUIVisibility="Hidden" Width="358" Height="456"/>
             <Frame x:Name="InventoryFrame" Margin="10,75,10,-32" NavigationUIVisibility="Hidden" Width="211" Height="456"/>
         </DockPanel>
         <Grid VerticalAlignment="Top" Height="100" HorizontalAlignment="Center">
             <Rectangle x:Name="CraftBackground" Stroke="Black" Margin="206,0,285,0" Fill="#FFB9B9B9"/>
-            <Rectangle x:Name="TradeBackground" Stroke="Black" Margin="315,0,176,0" Fill="#FFB9B9B9"/>
-            <Rectangle x:Name="SellBackground" Stroke="Black" Margin="424,0,67,0" Fill="#FFB9B9B9"/>
-            <TextBlock x:Name="PlayerName" HorizontalAlignment="Left" Margin="30,20,0,0" TextWrapping="Wrap" Text="Player Name" VerticalAlignment="Top" Width="139" FontSize="18"/>
-            <TextBlock x:Name="Currency" Margin="30,55,490,0" TextWrapping="Wrap" Width="100" Text="Currency" FontSize="18"/>
+            <Rectangle x:Name="TradeBackground" Stroke="Black" Margin="424,0,72,0" Fill="#FFB9B9B9"/>
+            <Rectangle x:Name="SellBackground" Stroke="Black" Margin="315,0,176,0" Fill="#FFB9B9B9"/>
+            <Rectangle x:Name="TipsBackground" Stroke="Black" Margin="528,0,0,0" Fill="#FFB9B9B9"/>
+            <TextBlock x:Name="PlayerName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Player Name" VerticalAlignment="Top" Width="180" FontSize="18" Height="34"/>
+            <TextBlock x:Name="Currency" Margin="10,55,490,0" TextWrapping="Wrap" Width="100" Text="Currency" FontSize="18"/>
             <Button x:Name="Craft" Content="Craft" Margin="206,0,285,0" Click="Craft_Click" FontSize="24"/>
-            <Button x:Name="Trade" Content="Buy" Margin="424,0,67,0" Click="Trade_Click" Height="100" VerticalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.5,0.5">
+            <Button x:Name="Trade" Content="Buy" Margin="424,0,72,0" Click="Trade_Click" Height="100" VerticalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -29,6 +31,7 @@
                 </Button.RenderTransform>
             </Button>
             <Button x:Name="Sell" Content="Sell" Margin="315,0,176,0" Click="Sell_Click" Height="100" VerticalAlignment="Center" FontSize="24" FontFamily="Yu Gothic Medium"/>
+            <Button x:Name="CollectTips" Content="Tips" Margin="528,0,0,0" Click="Tips_Click" FontSize="24" Height="100"/>
             <!-- <Button x:Name="Inventory" Content="Inventory" Margin="477,143,38,-143" Click="Inventory_Click" /> -->
         </Grid>
 

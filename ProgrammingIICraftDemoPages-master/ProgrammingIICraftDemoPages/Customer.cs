@@ -12,27 +12,27 @@ namespace ProgrammingIICraftDemoPages
         public List<string> randomGreetings = new List<string>() { "Howdy.", "Hi.", "Hello.", "What's up?", "Hey.", "Sup." };
 
 
-        public Customer() 
+        public Customer(Game game) 
         {
 
             PersonCurrency = 1000;
-            SetDefaultName();
+            SetDefaultName(game);
             
         }
 
-        public override void SetDefaultName()
+        public override void SetDefaultName(Game game)
         {
 
             this.PersonName = "Customer ";
-            base.SetDefaultName();
+            base.SetDefaultName(game);
         }
 
         public string CustomerIntroductionText()
         {
             string output = "";
             output = randomGreetings[new Random().Next(randomGreetings.Count)];
-            output += $" My name is {PersonName}.";
-           // pull rest of introduction from text file
+            output += $" I'm {PersonName}.";
+            output += " What do you have for sale?";
 
             return output;
         }

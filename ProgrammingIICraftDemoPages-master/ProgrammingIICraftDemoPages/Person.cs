@@ -12,9 +12,8 @@ namespace ProgrammingIICraftDemoPages
         public string PersonName { get { return personName; } set{ personName = value; } } 
         public double PersonCurrency = 10.00;
 
-        public List<Item> Inventory = new List<Item>();
-
-        public List<string> defaultNames = new List<string>() {"Daryl", "Kimmy", "Mike", "Steve-O", "Howard", "Jennifer", "Jessica", "Riley", "Denise", "Cameron", "Robert", "Morgan", "Emma", "Atlas", "Jimmy", "Marcus", "张" };
+        public List<Item> Inventory = new List<Item>();        
+        
         public string GetInventoryItemList()
         {
             string output = "Inventory:\n\n";
@@ -26,15 +25,15 @@ namespace ProgrammingIICraftDemoPages
             return output;
         }
 
-        public virtual void SetDefaultName()
+        public virtual void SetDefaultName(Game game)
         {
-            this.PersonName += GetRandomName();
+            this.PersonName += GetRandomName(game);
         }
 
-        public string GetRandomName()
+        public string GetRandomName(Game game)
         {
-            string namePicked = defaultNames[new Random().Next(defaultNames.Count)];
-            defaultNames.Remove(namePicked);
+            string namePicked = game.defaultNames[new Random().Next(game.defaultNames.Count)];
+            game.defaultNames.Remove(namePicked);
             return namePicked;
         }
     }

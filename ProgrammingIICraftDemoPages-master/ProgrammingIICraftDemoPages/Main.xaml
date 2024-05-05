@@ -5,13 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProgrammingIICraftDemoPages"
       mc:Ignorable="d" 
-       d:DesignHeight="400" d:DesignWidth="592"
+       d:DesignHeight="420" d:DesignWidth="592"
       Title="Main">
 
     <Grid Loaded="Grid_Loaded">
-        <ScrollViewer Width="536" Height="376" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="Output"  TextWrapping="Wrap" Text="Welcome" Height="356"/>
-        </ScrollViewer>
+
+        <TextBlock x:Name="Output"  TextWrapping="Wrap" Text="Welcome" Height="356" RenderTransformOrigin="0.5,0.5" Margin="2,0,0,64"/>
+
+        <TextBlock Name ="NameSubmissionInfo" TextWrapping="Wrap" Text="TextBlock" Margin="2,312,0,70"/>
+
+        <TextBox Name ="NameInput" HorizontalAlignment="Left" Margin="5,350,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="254" Height="52"/>
+        <Button Content="Submit" Click="SubmitName_Click" HorizontalAlignment="Left" Height="52" Margin="258,350,0,0" VerticalAlignment="Top" Width="83"/>
 
     </Grid>
 </Page>

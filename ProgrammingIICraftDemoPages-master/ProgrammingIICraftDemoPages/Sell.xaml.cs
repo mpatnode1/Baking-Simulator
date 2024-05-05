@@ -22,16 +22,20 @@ namespace ProgrammingIICraftDemoPages
     public partial class Sell : Page
     {
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        SellInventoryView sellInventoryView;
+        Customer currentCustomer;
 
         public Sell()
         {
             SetButtonVisibility();
             InitializeComponent();
+            updateSellList();
+            updateCustomerFeedbackText();
         }
 
         private void updateSellList()
         {
-            SellInventoryView sellInventoryView = new SellInventoryView();
+            sellInventoryView = new SellInventoryView();
             foreach (Item item in mainWindow.game.Player.Inventory)
             {
                 sellInventoryView.InventorySellList.Add(item);
@@ -52,7 +56,32 @@ namespace ProgrammingIICraftDemoPages
 
         private void SellConfirm_Click(object sender, RoutedEventArgs e)
         {
+            if (SellInventory.SelectedItem != null)
+            {
+                Item selectedItem = (Item)SellInventory.SelectedItem;
+                bool AbilityToSell = mainWindow.game.SellItemToCustomer(selectedItem);
 
+                if (AbilityToSell)
+                {
+                    SellFeedbackWindow.Text = "Thanks! This is delicious! Do you have anything else for sale?";
+                }
+                else
+                {
+                    SellFeedbackWindow.Text = "That doesn't seem right, are you sure you have that in stock?";
+                }
+                updateSellList();
+                mainWindow.inventory.UpdateInventoryWindow();
+                mainWindow.UpdateCurrency();
+            }
+        }
+
+        private void updateCustomerFeedbackText()
+        {
+            currentCustomer = mainWindow.game.GetCustomer();
+            if (currentCustomer != null) 
+            {
+                SellFeedbackWindow.Text = currentCustomer.CustomerIntroductionText();
+            }
         }
     }
 
